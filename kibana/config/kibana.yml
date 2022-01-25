@@ -3,7 +3,8 @@ server.shutdownTimeout: "5s"
 elasticsearch.hosts: [ "http://elasticsearch-service:9200" ]
 monitoring.ui.container.elasticsearch.enabled: true
 elasticsearch.username: "kibana_system"
-xpack.security.enabled: true
+#Deprecated setting:
+#xpack.security.enabled: true
 xpack.security.session.idleTimeout: "1h"
 xpack.security.session.lifespan: "24h"
 xpack.reporting.roles.enabled: false
