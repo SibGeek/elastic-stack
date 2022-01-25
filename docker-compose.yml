@@ -1,5 +1,4 @@
 version: "3.9"
-env_file: ./elastic-stack.env
 
 services:
   elasticsearch-service:
@@ -11,7 +10,7 @@ services:
       - "9300:9300"
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-      - elasticsearch-volume:/usr/share/elasticsearch/data
+      #- elasticsearch-volume:/usr/share/elasticsearch/data
     networks:
       - net
 
