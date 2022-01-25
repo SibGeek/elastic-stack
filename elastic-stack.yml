@@ -1,0 +1,37 @@
+version: "3.9"
+env_file: ./elastic-stack.env
+
+services:
+  elasticsearch-service:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_STACK_VERSION}
+    container_name: elasticsearch-service-container
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - elasticsearch-volume:/usr/share/elasticsearch/data
+    networks:
+      - net
+
+  kibana-service:
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_STACK_VERSION}
+    container_name: kibana-service-container
+    restart: always
+    depends_on:
+      - elasticsearch-service
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+    networks:
+      - net
+
+volumes:
+  elasticsearch-volume:
+    driver: local
+
+networks:
+  net:
+    driver: bridge
